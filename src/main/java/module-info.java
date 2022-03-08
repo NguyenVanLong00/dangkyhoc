@@ -5,4 +5,5 @@ module com.example.dangkyhoc {
     exports com.example.dangkyhoc;
     exports com.example.dangkyhoc.controller;
     opens com.example.dangkyhoc.controller to javafx.fxml;
+    exports com.example.dangkyhoc.tableModel;
 }

@@ -1,12 +1,14 @@
 package com.example.dangkyhoc.model;
 
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.Statement;
-import java.util.Map;
+import com.example.dangkyhoc.Helper;
 
-public class Account extends Model{
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Account extends Model {
 
     public enum roles {
         ADMIN("admin"),
@@ -24,14 +26,38 @@ public class Account extends Model{
         }
     }
 
+    public Account() {
+        super();
+        this.table = "account";
+    }
+
+    public Account(String fullName,String username, String password) {
+        super();
+        this.table = "account";
+
+        this.fullName = fullName;
+        this.username = username;
+        setPassword(password);
+        this.role = "user";
+    }
 
     private String username;
     private String password;
     private String role;
+
+    public Account(Integer id, String username, String password, String role, String fullName, Integer credit) {
+        super();
+        this.table = "account";
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.fullName = fullName;
+        this.credit = credit;
+    }
+
     private String fullName;
-    private int credit;
-    private String id;
-    private String query;
+    private Integer credit;
 
     public String getUsername() {
         return username;
@@ -41,30 +67,22 @@ public class Account extends Model{
         this.username = username;
     }
 
-
-
-    public void setPassword(String password) throws NoSuchAlgorithmException {
-        MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-        messageDigest.update(password.getBytes());
-        this.password = new String(messageDigest.digest());
+    public void setPassword(String password) {
+        this.password = Helper.getMd5(password);
     }
 
-    public boolean checkPassword(String password) throws NoSuchAlgorithmException {
-        MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-        messageDigest.update(password.getBytes());
-        return this.password == new String(messageDigest.digest());
+    public boolean checkPassword(String password) {
+        System.out.println("old: " + this.password);
+        System.out.println("new: " + Helper.getMd5(password));
+        return this.password.equals(Helper.getMd5(password));
     }
 
     public String getRole() {
         return role;
     }
 
-    public boolean setRole(String role) {
-        if (role == roles.ADMIN.toString() || role == roles.USER.toString()){
-            this.role = role;
-            return true;
-        }
-        return false;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getFullName() {
@@ -80,19 +98,52 @@ public class Account extends Model{
     }
 
     public boolean setCredit(int credit) {
-        if (credit >0) {
+        if (credit >= 0) {
             this.credit = credit;
+            return true;
         }
         return false;
     }
 
-    public String getId() {
-        return id;
+    public boolean save() {
+        String query;
+
+        if (id!=null){
+            query = "UPDATE " + table + " SET full_name='" + fullName + "', role='" + role + "',username='" + username + "',password='" + password + "',credit=" + credit.toString() + " WHERE id=" + id.toString();
+        }else {
+            query = "INSERT INTO `dangkyhoc`.`account` (`full_name`,`role`, `username`, `password`) VALUES ('"+fullName+"', '"+role+"','"+username+"', '"+password+"');";
+        }
+
+        return executeUpdate(query);
     }
 
-    public void refresh(){
-        String query = "SELECT * FROM account where id="+this.id.toString();
+    public boolean login() {
+        String condition = "username ='" + username + "' and password ='" + password + "'";
+        String query = "SELECT * FROM " + table + " where " + condition;
+        System.out.println("query: " + query);
 
+        ResultSet resultSet = executeQuery(query);
+        if (resultSet == null) {
+            return false;
+        }
+
+        setAttribute(resultSet);
+        return true;
+    }
+
+    public void setAttribute(ResultSet resultSet) {
+        try {
+            resultSet.next();
+
+            setFullName(resultSet.getString("full_name"));
+            setCredit(resultSet.getInt("credit"));
+            setUsername(resultSet.getString("username"));
+            setRole(resultSet.getString("role"));
+            id = resultSet.getInt("id");
+            password = resultSet.getString("password");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

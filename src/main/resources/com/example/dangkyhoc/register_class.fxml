@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dangkyhoc.controller.studentClassController">
+   <children>
+      <MenuBar fx:id="home_menu">
+         <menus>
+            <Menu mnemonicParsing="false" text="Tài khoản">
+               <items>
+                  <MenuItem fx:id="change_password_item" mnemonicParsing="false" text="Đổi mật khẩu" />
+                  <MenuItem fx:id="logout_item" mnemonicParsing="false" text="Đăng xuất" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Lớp">
+               <items>
+                  <MenuItem fx:id="student_class_list_item" mnemonicParsing="false" text="Danh sách lớp" />
+                  <MenuItem fx:id="register_class_item" mnemonicParsing="false" text="Đăng ký học" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <AnchorPane prefHeight="768.0" prefWidth="1080.0" styleClass="wrapper">
+         <children>
+            <Text layoutX="14.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Đăng ký lớp" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Label layoutX="32.0" layoutY="72.0" text="Tìm lớp" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="60.0">
+               <graphic>
+                  <TextField fx:id="search_bar" />
+               </graphic>
+            </Label>
+            <TableView fx:id="class_table" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+              <columns>
+                <TableColumn fx:id="class_col_name" prefWidth="350.0" text="Tên" />
+                <TableColumn fx:id="class_col_max" prefWidth="174.0" text="Số lượng tối đa" />
+                  <TableColumn fx:id="class_col_status" minWidth="0.0" prefWidth="230.0" text="Trạng thái" />
+                  <TableColumn fx:id="class_col_course" minWidth="0.0" prefWidth="154.0" text="Môn học" />
+                  <TableColumn fx:id="class_col_credit" minWidth="0.0" prefWidth="107.0" text="Số tín" />
+              </columns>
+            </TableView>
+            <Button mnemonicParsing="false" onAction="#registerClass" styleClass="button-primary" text="Đăng ký" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
+            <Button mnemonicParsing="false" onAction="#cancelClass" styleClass="button-primary" text="Hủy đăng ký" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="60.0" />
+         </children>
+      </AnchorPane>
+   </children>
+   <styleClass>
+      <String fx:value="background" />
+      <String fx:value="window-size" />
+   </styleClass>
+</VBox>

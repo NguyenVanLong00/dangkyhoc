@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dangkyhoc.controller.ClassController">
+   <children>
+      <MenuBar fx:id="home_menu">
+         <menus>
+            <Menu mnemonicParsing="false" text="Tài khoản">
+               <items>
+                  <MenuItem fx:id="change_password_item" mnemonicParsing="false" text="Đổi mật khẩu" />
+                  <MenuItem fx:id="logout_item" mnemonicParsing="false" text="Đăng xuất" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Môn học">
+               <items>
+                  <MenuItem fx:id="course_list_item" mnemonicParsing="false" text="Danh sách môn" />
+                  <MenuItem fx:id="create_course_item" mnemonicParsing="false" text="Thêm môn" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Học viên">
+               <items>
+                  <MenuItem fx:id="student_list_item" mnemonicParsing="false" text="Danh sách học viên" />
+                  <MenuItem fx:id="create_student_item" mnemonicParsing="false" text="Thêm học viên" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Lớp">
+               <items>
+                  <MenuItem fx:id="class_list_item" mnemonicParsing="false" text="Danh sách lớp" />
+                  <MenuItem fx:id="create_class_item" mnemonicParsing="false" text="Mở lớp" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <AnchorPane prefHeight="768.0" prefWidth="1080.0" styleClass="wrapper">
+         <children>
+            <Text layoutX="14.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Lớp học" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Label layoutX="32.0" layoutY="72.0" text="Tìm lớp" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="60.0">
+               <graphic>
+                  <TextField fx:id="search_bar" />
+               </graphic>
+            </Label>
+            <TableView fx:id="class_table" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+              <columns>
+                <TableColumn fx:id="class_col_name" prefWidth="145.0" text="Tên" />
+                <TableColumn fx:id="class_col_max" prefWidth="201.0" text="Số lượng tối đa" />
+                  <TableColumn fx:id="class_col_current" minWidth="0.0" prefWidth="284.0" text="Số lượng hiện tại" />
+                  <TableColumn fx:id="class_col_course" minWidth="0.0" prefWidth="214.0" text="Môn học" />
+                  <TableColumn fx:id="class_col_status" minWidth="0.0" prefWidth="171.0" text="Trạng thái" />
+              </columns>
+            </TableView>
+            <Button layoutX="996.0" layoutY="41.0" mnemonicParsing="false" onAction="#deleteRow" styleClass="button-primary" text="Xóa" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
+            <Button mnemonicParsing="false" onAction="#openClass" styleClass="button-primary" text="Mở" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="60.0" />
+            <Button mnemonicParsing="false" onAction="#closeClass" styleClass="button-primary" text="Đóng" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="60.0" />
+         </children>
+      </AnchorPane>
+   </children>
+   <styleClass>
+      <String fx:value="background" />
+      <String fx:value="window-size" />
+   </styleClass>
+</VBox>

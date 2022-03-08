@@ -1,0 +1,36 @@
+ .error-message {
+     -fx-fill: #ee5a5a;
+     -fx-font-size: 12px;
+ }
+
+ .background {
+     -fx-background-color: #fff4e3;
+ }
+
+ .window-size{
+     -fx-pref-width: 1080px;
+     -fx-pref-height: 768px;
+ }
+
+ .wrapper {
+     -fx-padding:16px 32px;
+ }
+
+ .title{
+     -fx-font-size: 28px;
+
+ }
+
+ .grid-form {
+     -fx-pref-width: 500px;
+ }
+
+ Text {
+     -fx-fill: #5d5d5a;
+ }
+
+ .button-primary {
+     -fx-background-color: #ffa45c;
+     -fx-fill: #fff !important;
+ }
+
