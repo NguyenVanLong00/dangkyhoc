@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -39,6 +40,11 @@ public class studentMenuController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 Store.account = null;
+                try {
+                    Helper.writeToFile("","");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 Helper.changeScene(home_menu,"login.fxml");
             }
         });

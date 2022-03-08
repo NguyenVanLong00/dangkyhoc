@@ -31,7 +31,7 @@ public class Account extends Model {
         this.table = "account";
     }
 
-    public Account(String fullName,String username, String password) {
+    public Account(String fullName, String username, String password) {
         super();
         this.table = "account";
 
@@ -56,6 +56,10 @@ public class Account extends Model {
         this.credit = credit;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     private String fullName;
     private Integer credit;
 
@@ -69,6 +73,10 @@ public class Account extends Model {
 
     public void setPassword(String password) {
         this.password = Helper.getMd5(password);
+    }
+
+    public void setRawPassword(String password) {
+        this.password = password;
     }
 
     public boolean checkPassword(String password) {
@@ -108,10 +116,10 @@ public class Account extends Model {
     public boolean save() {
         String query;
 
-        if (id!=null){
+        if (id != null) {
             query = "UPDATE " + table + " SET full_name='" + fullName + "', role='" + role + "',username='" + username + "',password='" + password + "',credit=" + credit.toString() + " WHERE id=" + id.toString();
-        }else {
-            query = "INSERT INTO `dangkyhoc`.`account` (`full_name`,`role`, `username`, `password`) VALUES ('"+fullName+"', '"+role+"','"+username+"', '"+password+"');";
+        } else {
+            query = "INSERT INTO `dangkyhoc`.`account` (`full_name`,`role`, `username`, `password`) VALUES ('" + fullName + "', '" + role + "','" + username + "', '" + password + "');";
         }
 
         return executeUpdate(query);

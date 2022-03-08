@@ -208,6 +208,7 @@ public class ClassController extends MenuController{
     FilteredList<ClassModel> filteredList;
     private void setUpSearch(){
         filteredList = new FilteredList<>(classModelObservableList,b->true);
+
         search_bar.textProperty().addListener((observable,oldValue,newValue)->{
             filteredList.setPredicate(searchModel ->{
 

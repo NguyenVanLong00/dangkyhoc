@@ -7,11 +7,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class DangKyHocApplication extends javafx.application.Application {
+
+    public static Scene scene;
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(DangKyHocApplication.class.getResource("login.fxml"));
 
-        Scene scene = new Scene(fxmlLoader.load(),1080 ,768);
+        scene = new Scene(fxmlLoader.load(),1080 ,768);
         stage.setScene(scene);
         stage.show();
     }
